@@ -1,0 +1,59 @@
+<ng-container
+  *ngIf="{
+    tickets: facade.tickets$ | async,
+    statistics: facade.statistics$ | async
+  } as props"
+>
+  <div class="container">
+    <div>
+      <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Tippmöglichkeiten</mat-label>
+          <input
+            type="number"
+            min="1"
+            max="12"
+            matInput
+            formControlName="tipCount"
+          />
+          <mat-error
+            *ngIf="
+              formGroup.hasError('min', 'tipCount') ||
+              formGroup.hasError('max', 'tipCount')
+            "
+          >
+            Wert muss im Bereich 1 -12 liegen
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="withBonusNumber">
+          Mit Superzahl?
+        </mat-checkbox>
+        <button type="submit" mat-raised-button color="primary">LOS</button>
+      </form>
+
+      <mat-action-list *ngIf="props.tickets">
+        <button
+          *ngFor="
+            let item of props.tickets;
+            let idx = index;
+            trackBy: trackById
+          "
+          @fadeIn
+          mat-list-item
+          (click)="router.navigate([item.id, 'details'])"
+        >
+          {{ item | ticketLabel }}
+        </button>
+      </mat-action-list>
+    </div>
+
+    <div *ngIf="props.statistics" class="statistics">
+      <h3>Statistiken</h3>
+      <ul>
+        <li *ngFor="let num of props.statistics | keyvalue">
+          {{ num.key }}: {{ num.value }}%
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>

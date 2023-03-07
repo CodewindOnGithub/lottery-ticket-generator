@@ -1,0 +1,11 @@
+<div
+  *ngIf="{
+    ticket: facade.activeTicket$ | async,
+    routeParams: routeParamChange$ | async
+  } as props"
+>
+  <h2 *ngIf="props.ticket">
+    {{ props.ticket | ticketLabel }}
+  </h2>
+  <app-ticket *ngIf="props.ticket" [ticket]="props.ticket"></app-ticket>
+</div>

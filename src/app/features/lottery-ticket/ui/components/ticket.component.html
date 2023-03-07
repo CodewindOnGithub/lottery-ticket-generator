@@ -1,0 +1,11 @@
+<div class="ticket">
+  <div *ngFor="let tip of ticket.tips" class="tip">
+    <div *ngFor="let num of tip.fields" class="field">
+      {{ num }}
+    </div>
+    <div *ngIf="tip.bonusNumber !== undefined" class="bonus-number">
+      {{ tip.bonusNumber }}
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>

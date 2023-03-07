@@ -1,0 +1,21 @@
+button {
+  margin-top: 8px;
+}
+
+.form {
+  display: flex;
+  padding: 16px;
+  max-width: 300px;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statistics {
+  padding: 16px;
+  max-width: 300px;
+  margin-right: 128px;
+}
